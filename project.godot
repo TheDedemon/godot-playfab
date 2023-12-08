@@ -32,6 +32,7 @@ config/icon="res://addons/godot-playfab/icon.png"
 
 SceneManager="*res://Scripts/SceneManager.gd"
 PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
+SteamWrapper="*res://Scripts/SteamWrapper.gd"
 
 [debug]
 

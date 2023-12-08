@@ -74,6 +74,10 @@ text = "Stay logged in"
 layout_mode = 2
 text = "Login"
 
+[node name="SteamLogin" type="Button" parent="MarginContainer/Login"]
+layout_mode = 2
+text = "Steam Login"
+
 [node name="AnonLogin" type="Button" parent="MarginContainer/Login"]
 layout_mode = 2
 text = "Anonymous Login"
@@ -89,5 +93,6 @@ bbcode_enabled = true
 
 [connection signal="toggled" from="MarginContainer/Login/StayLoggedInCheckbox" to="MarginContainer" method="_on_stay_logged_in_checkbox_toggled"]
 [connection signal="pressed" from="MarginContainer/Login/Login" to="MarginContainer" method="_on_Login_pressed"]
+[connection signal="pressed" from="MarginContainer/Login/SteamLogin" to="MarginContainer" method="_on_SteamLogin_pressed"]
 [connection signal="pressed" from="MarginContainer/Login/AnonLogin" to="MarginContainer" method="_on_AnonLogin_pressed"]
 [connection signal="pressed" from="MarginContainer/Login/Back" to="MarginContainer" method="_on_Back_pressed"]
