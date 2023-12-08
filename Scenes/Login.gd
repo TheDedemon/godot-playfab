@@ -65,6 +65,10 @@ func _on_Login_pressed():
 	PlayFabManager.client.login_with_email(email, password, tags, combined_info_request_params)
 
 func _on_SteamLogin_pressed() -> void:
+	print_rich("[color=yellow]Steam should be launch on your device[/color]")
+	print_rich("[color=yellow]Steam add-ons should be enable in the Playfab/Add-ons[/color]")
+	print_rich("[color=yellow]Steam App Id should be setted in the SteamWrapper script[/color]")
+	
 	if SteamWrapper.initialize() && SteamWrapper.create_auth_session_ticket():
 		$Login.hide()
 		_show_progess()
@@ -73,7 +77,7 @@ func _on_SteamLogin_pressed() -> void:
 		var player_profile_view_constraints = PlayerProfileViewConstraints.new()
 		combined_info_request_params.ProfileConstraints = player_profile_view_constraints
 		PlayFabManager.client.login_with_steam(SteamWrapper.get_auth_session_ticket_string(), false, true, combined_info_request_params)
-	
+
 
 func _on_AnonLogin_pressed():
 	$Login.hide()
