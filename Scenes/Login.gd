@@ -69,15 +69,31 @@ func _on_SteamLogin_pressed() -> void:
 	print_rich("[color=yellow]Steam add-ons should be enable in the Playfab/Add-ons[/color]")
 	print_rich("[color=yellow]Steam App Id should be setted in the SteamWrapper script[/color]")
 	
-	if SteamWrapper.initialize() && SteamWrapper.create_auth_session_ticket():
-		$Login.hide()
-		_show_progess()
-		var combined_info_request_params = GetPlayerCombinedInfoRequestParams.new()
-		combined_info_request_params.show_all()
-		var player_profile_view_constraints = PlayerProfileViewConstraints.new()
-		combined_info_request_params.ProfileConstraints = player_profile_view_constraints
-		PlayFabManager.client.login_with_steam(SteamWrapper.get_auth_session_ticket_string(), false, true, combined_info_request_params)
+	SteamWrapper.getAuthSessionTicketCompleted.connect(_getAuthSessionTicketCompleted)
+	SteamWrapper.getAuthTicketForWebAPICompleted.connect(_getAuthTicketForWebAPICompleted)
+	
+	if SteamWrapper.initialize():
+		#SteamWrapper.create_auth_session_ticket()
+		SteamWrapper.create_auth_ticker_for_web_api()
 
+
+func _getAuthSessionTicketCompleted(error: bool) -> void:
+	$Login.hide()
+	_show_progess()
+	var combined_info_request_params = GetPlayerCombinedInfoRequestParams.new()
+	combined_info_request_params.show_all()
+	var player_profile_view_constraints = PlayerProfileViewConstraints.new()
+	combined_info_request_params.ProfileConstraints = player_profile_view_constraints
+	PlayFabManager.client.login_with_steam(SteamWrapper.get_auth_session_ticket_string(), false, true, combined_info_request_params)
+
+func _getAuthTicketForWebAPICompleted(error: bool) -> void:
+	$Login.hide()
+	_show_progess()
+	var combined_info_request_params = GetPlayerCombinedInfoRequestParams.new()
+	combined_info_request_params.show_all()
+	var player_profile_view_constraints = PlayerProfileViewConstraints.new()
+	combined_info_request_params.ProfileConstraints = player_profile_view_constraints
+	PlayFabManager.client.login_with_steam(SteamWrapper.get_auth_ticket_for_web_api_string(), true, true, combined_info_request_params)
 
 func _on_AnonLogin_pressed():
 	$Login.hide()
